@@ -107,6 +107,8 @@
 
 </style>
 </head>
+
+<script runat=server language=ampscript>
 %%[
 IF FORMAT(Now(), "tt") == "AM" THEN
 SET @Email_Type = "am"
@@ -149,9 +151,13 @@ SET @greeting = Concat(@dear, @firstname) /* otherwise, concatenate alternate gr
 ENDIF
 
 /* END GREETING DETERMINATION LOGIC */
-
-
 ]%%
+</script>
+<!-- END AMPSCRIPT -->
+
+<!-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ BEGIN EMAIL CONTENT -->
+
+<!-- BEGIN EMAIL BODY -->
 <body style="margin: 0; padding: 0;">
 
  	<!-- BEGIN OUTER SHELL TABLE -->
