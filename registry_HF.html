@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<style>
+
+  .appleLinks {
+    color:#000000 !important; 
+  }
+
+  .appleLinks a {
+    color: #d0947b;
+    text-decoration: none;
+  }
+
+  .generalLinks {
+    color: #d0947b;
+    text-decoration: none;
+  }
+
+  .generalLinks a {
+    color: #d0947b;
+    text-decoration: none;
+  }
+
+  .convertLinkToNormalText_BODY {
+    color: #000000;
+    text-decoration: none;
+  }
+
+  .convertLinkToNormalText_BODY a {
+    color: #000;
+    text-decoration: none;
+  }
+
+  .convertLinkToNormalText_FOOTER {
+    color: #999;
+    text-decoration: none;
+  }
+
+  .convertLinkToNormalText_FOOTER a {
+    color: #999;
+    text-decoration: none;
+  }
+
+  @media only screen and (max-width: 640px)  {
+
+    .appleLinks {
+      color: #d0947b;
+      text-decoration: none;
+    }
+
+    .appleLinks a {
+      color: #d0947b;
+      text-decoration: none;
+    }
+
+    #mobile_header {
+    	max-width: 50%;
+    	height: auto;
+    	text-align: center;
+    	margin: 0 auto;
+    }
+
+    .mobile_content {
+      width: 98% !important;
+      max-height: none !important;
+      margin-left: 5px !important;
+      margin-right: 5px !important;
+    }
+
+    .image_resize img{
+      max-width: 98% !important;
+      max-height: none !important;
+      max-height: none !important;
+      text-align: center !important;
+    }
+
+    .spacer_height{
+    	height: 15px;
+    }
+
+  	.mobile_social {
+  	  width: 120px !important;
+  	  margin: 0 auto !important;
+  	  height: auto !important;
+  	  max-height: none !important;
+  	  text-align: center !important;
+  	}
+
+  	.mobile_social td {
+  	  padding: 0 !important;
+  	  margin: 0 !important;
+  	  max-width: 30px !important;
+  	  text-align: center !important;
+  	}    
+
+      .mobile_social img {
+  	  max-width: 30px !important;
+  	  height: auto !important;
+  	  max-height: none !important;
+  	}
+  }
+
+</style>
+</head>
+%%[
+IF FORMAT(Now(), "tt") == "AM" THEN
+SET @Email_Type = "am"
+ELSE
+SET @Email_Type = "pm"
+ENDIF
+
+SET @date_str = xtshortdate
+
+SET @URL_Unsubscribe = Concat('https://www.onekingslane.com/my_account/email-preferences?id=',customer_id,'&token=',MD5(emailaddr),'&UTM_source=Corporate&utm_medium=Email&utm_campaign=%%jobid%%&utm_content=%%xtshortdate%%.%%_subscriberkey%%.',@Email_Type,'&utm_term=Footer.EmailPreferences')
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ BEGIN GREETING DETERMINATION LOGIC ~~~~~~ */
+/* DECLARE VARIABLE TO BE TESTED */
+VAR @firstName
+SET @firstName = firstname
+
+/* VARIABLE FOR FINAL RETURN STRING */
+VAR @greeting
+
+/* VARIBALE FOR NAME FOUND */
+VAR @dear
+SET @dear = "Dear "
+
+/* VARIABLE FOR NO NAME FOUND */
+VAR @hello
+SET @hello = "Hello"
+
+
+/* SET REGULAR EXPRESSIONS TO TEST AGAINST */
+SET @regEx1 = "\@" /* Matches to literal @ character */
+SET @result = RegExMatch(@firstName, @regEx1, 0) 
+/* Variable to store result of RegEmMatch function */
+/* Breakdown: if firstname equals regEx at least zero times, then generate array w/ matches */
+
+/* BEGIN LOGIC TO APPLY FIRST NAME VALIDATION */
+IF Length(@result) > 0 /* If the length of the array is greater than 0 */
+THEN SET @greeting = @hello /*greeting is just hello */
+ELSE 
+SET @greeting = Concat(@dear, @firstname) /* otherwise, concatenate alternate greeting */
+ENDIF
+
+/* END GREETING DETERMINATION LOGIC */
+
+
+]%%
+<body style="margin: 0; padding: 0;">
+
+ 	<!-- BEGIN OUTER SHELL TABLE -->
+  	<table align="center" border="0" cellpadding="0" cellspacing="0" width="650" style="margin: 0 auto;" class="mobile_content">
+
+  		<!-- BEGIN LOGO AND BANNER TABLE -->
+	  	<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="margin: 0 auto;">
+      		<!-- BEGIN LOGO --> 
+	      	<tr> 
+	        	<td colspan="5" width="100%" style="text-align:center;"> 
+	          		<a href="%%=RedirectTo(Concat('https://www.onekingslane.com?utm_source=Corporate&utm_medium=Email&utm_campaign=', jobid , '&utm_content=', @date_str, '.',  _subscriberkey, '.', @Email_Type, '&utm_term=Header.Logo'))=%%">
+	            		<div class="logo">
+	              			<img src="http://okl.scene7.com/is/image/OKL/email_mobile_header_50x406?$wid=406&qlt=100,1" border="0" id="mobile_header"/>
+	            		</div>
+	          		</a>
+	        	</td> 
+	      	</tr> 
+	      	<!-- END LOGO -->
+
+	      	<!-- BEGIN TOP COLUMN -->
+	      	<tr> 
+	        	<td width="100%" height="20" class="spacer_height">
+	        	</td> 
+	      	</tr> 
+	      	<!-- END TOP COLUMN -->
+
+		    <tr>
+		        <td width="100%" align="center" style="text-align:center;" class="image_resize">
+		          	<a href="%%=RedirectTo(Concat('https://www.onekingslane.com/registry-fund?utm_source=Corporate&utm_medium=Email&utm_campaign=', jobid, '&utm_content=', @date_str, '.', _subscriberkey, '&utm_term=Hero.Header.1'))=%%" style="border-style: none;" border="0">
+		            	<img src="http://okl.scene7.com/is/image/OKL/registry%5Fbanner%5Fredesign?$w650%5Fjpg$&qlt=100,1" style="display: block; border-style: none; margin: 0 auto;" border="0">
+		          	</a>
+		        </td>
+		    </tr>
+	  	</table>
+	  	<!-- END LOGO AND BANNER TABLE -->
+
+	  	<!-- BEGIN EMAIL BODY -->
+	  	<table align="center" border="0" cellpadding="0" cellspacing="0" width="650" style="margin: 0 auto;border: 3px solid #ad9786; margin-top: 10px;" class="mobile_content">	
+	  		<tr>
+                <td width="100%" style="padding: 20px;">
+                    <span style="font-family:Georgia,Helvetica,sans-serif;; font-size: 15px; color: #000000; font-weight: 100; margin-bottom: 35px;">
+                      %%=ProperCase(@greeting)=%%, 
+                    </span>
+                      
+                    	<br>
+                    	<br>
+
+                    <span style="font-family:Georgia,Helvetica,sans-serif;; font-size: 15px; color: #000000; font-weight: 100; margin-bottom: 35px;">
+                      We’re sorry to say we discontinued our registry program, effective <span style="font-family:Georgia,Helvetica,sans-serif; font-size: 15px; color: #000000; font-weight: 100; margin-bottom: 35px;" class="appleLinks">December 1, 2016</span>. But don’t worry: You still have %%=FormatNumber(remaining_amount, "C2", "en-US")=%% in your fund, and it will remain available for you to spend whenever you are ready. However, your guests will no longer be able to contribute to your fund.
+                    </span>
+
+                    	<br>
+                    	<br>
+
+                    <span style="font-family:Georgia,Helvetica,sans-serif;; font-size: 15px; color: #000000; font-weight: 100">
+                      <span style="font-family:Georgia,Helvetica,sans-serif;; font-size: 15px; color: #000000; font-weight: 100">
+                      To show our thanks, we’ll give you an additional credit of $100 if you use your funds
+
+                      <span style="font-family:Georgia,Helvetica,sans-serif; font-size: 15px; color: #000000; font-weight: 100; margin-bottom: 35px;" class="convertLinkToNormalText_BODY">
+                        by
+                      </span> 
+
+                      <span style="font-family:Georgia,Helvetica,sans-serif; font-size: 15px; color: #000000; font-weight: 100; margin-bottom: 35px;" class="appleLinks">
+                        December 31, 2016
+                      </span> 
+                      (use code %%code%% at checkout). 
+
+                      You’ll find plenty to choose from—not just our vast assortment of furnishings but also holiday decor, gifts, and entertaining essentials. &#40;And if you’re still deciding how best to decorate your home together, why not make an appointment with our expert designers at  
+                          <a href="%%=RedirectTo(Concat('https://www.onekingslane.com/thestudio?utm_source=Corporate&utm_medium=Email&utm_campaign=', jobid , '&utm_content=', @date_str, '.',  _subscriberkey, '.', @Email_Type, '&utm_term=Studio.Link'))=%%" style="text-decoration:none; color: #d0947b;" class="generalLinks">
+                            The Studio
+                          </a> 
+
+                        at 
+
+                        <span style="font-family:Georgia,Helvetica,sans-serif; font-size: 15px; color: #000000; font-weight: 100; margin-bottom: 35px;" class="appleLinks">
+                          One Kings Lane in
+                        </span> 
+
+                        <a href="https://goo.gl/maps/5hcrr2xW1Tz" style="text-decoration:none; color: #d0947b;">
+                          New York
+                        </a> 
+            
+
+                        <span style="font-family:Georgia,Helvetica,sans-serif; font-size: 15px; color: #000000; font-weight: 100; margin-bottom: 35px;">
+                          or
+                        </span> 
+
+                        <a href="https://goo.gl/maps/P9Mxk6paYP12" style="text-decoration:none; color: #d0947b;">
+                          San Francisco
+                        </a> 
+                        for a free consultation?&#41;
+                    </span>
+
+                      	<br>
+                      	<br>
+
+                    <span style="font-family:Georgia,Helvetica,sans-serif;; font-size: 15px; color: #000000; font-weight: 100;">
+                      If you have any questions, please email us at <a href="mailto:registryhelp@onekingslane.com?Subject=Registry%20Help" style="text-decoration:none; color: #d0947b;" class="generalLinks">registryhelp@onekingslane.com</a></span>. 
+                    </span>
+
+                      	<br>
+                      	<br>
+
+                    <span style="font-family:Georgia,Helvetica,sans-serif;; font-size: 15px; color: #000000; font-weight: 100; margin-bottom: 35px;">
+                      	Here’s to a beautiful home,
+                      		<br>
+                      	Debbie Propst
+	                    	<br>
+                    	  President, <span style="font-family:Georgia,Helvetica,sans-serif; font-size: 15px; color: #000000; font-weight: 100; margin-bottom: 35px;" class="convertLinkToNormalText_BODY">One Kings Lane</span>
+                    </span>
+                      	
+                      	<br>
+                  </td>
+                </tr>
+	  	</table>
+	  	<!-- END EMAIL BODY -->
+
+	  	<!-- BEGIN EMAIL FOOTER -->
+	  	<table align="center" border="0" cellpadding="0" cellspacing="0" width="650" style="margin: 0 auto;"" class="mobile_content">
+    		<tr> 
+      			<td align="center"> 
+        			<table cellpadding="0" cellspacing="0" border="0" align="center"> 
+          				<tr> 
+            				<td style="color: #999; font-family:Helvetica,sans-serif;; font-size: 9px; padding-top: 20px; padding-bottom:15px; text-align: center">
+              					<span style="font-family:Helvetica,sans-serif; font-size: 9px; color: #999;" class="convertLinkToNormalText_FOOTER">%%xtyear%% One Kings Lane&reg;</span> All rights reserved. One Kings Lane and the elephant logo are registered trademarks of One Kings Lane Inc. 
+              				
+              					<br> 
+              					<br> 
+              					<br>
+              					
+              					<a href="https://www.onekingslane.com/privacy?UTM_source=Corporate&utm_medium=Launch&utm_campaign=%%=v(jobid)=%%&utm_content=%%xtshortdate%%.%%_subscriberkey%%.%%=v(@Email_Type)=%%&utm_term=Footer.PrivacyPolicy" style="text-decoration:none; color: #999; font-size: 10px;">
+                					PRIVACY POLICY
+              					</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+
+             					<a href="https://www.onekingslane.com/contact-us?UTM_source=Corporate&utm_medium=Launch&utm_campaign=%%=v(jobid)=%%&utm_content=%%xtshortdate%%.%%_subscriberkey%%.%%=v(@Email_Type)=%%&utm_term=Footer.ContactUs"  style="text-decoration:none; color: #999; font-size: 10px;">
+                					CONTACT US
+              					</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+
+              					<a href="https://www.onekingslane.com/corporate/careers/?UTM_source=Corporate&utm_medium=Launch&utm_campaign=%%=v(jobid)=%%&utm_content=%%xtshortdate%%.%%_subscriberkey%%.%%=v(@Email_Type)=%%&utm_term=Footer.Hiring"  style="text-decoration:none; color: #999; font-size: 10px;">
+                					HIRING
+              					</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+
+              					<a href="%%=RedirectTo(v(@URL_Unsubscribe))=%%"  style="text-decoration:none; color: #999; font-size: 10px;">
+                					UNSUBSCRIBE
+              					</a> 
+            				</td> 
+          				</tr> 
+
+          				<tr> 
+            				<td align="center"> 
+              					<table cellpadding="0" cellspacing="0" border="0" align="center" style="width: 110px; margin: 0 auto;" class="mobile_social"> 
+                					<tr> 
+                  						<td style="padding-right:3px; padding-top:10px;">
+                    						<a href="http://www.facebook.com/OneKingsLane" border="0">
+                      							<img src="https://okl.scene7.com/is/image/OKL/Facebook?fmt=png" alt="OKL Facebook" border="0"  />
+                    						</a> 
+                  						</td> 
+    
+                  						<td style="padding-right:5px;padding-top:10px;">
+                    						<a href="http://instagram.com/onekingslane" border="0">
+                      							<img src="https://okl.scene7.com/is/image/OKL/Instagram?fmt=png" alt="OKL Instagram" border="0"  />
+                    						</a> 
+                  						</td> 
+            
+                  						<td style="padding-right:3px; padding-top:10px;">
+                    						<a href="http://pinterest.com/onekingslane/" border="0">
+                      							<img src="https://okl.scene7.com/is/image/OKL/Pinterest?fmt=png" alt="OKL Pinterest" border="0"  />
+                    						</a> 
+                  						</td> 
+    
+                  						<td style="padding-right:3px; padding-top:10px;">
+                    						<a href="http://twitter.com/onekingslane" border="0">
+                      							<img src="https://okl.scene7.com/is/image/OKL/Twitter?fmt=png" alt="OKL Twitter" border="0"  />
+                   							</a> 
+                  						</td> 
+                					</tr> 
+                  				</table> 
+                			</td> 
+              			</tr> 
+            		</table> 
+  				</td> 
+    		</tr> 
+    	</table>
+ 	</table>
+ 	<!-- END OUTER SHELL TABLE -->
+ 	<custom name="opencounter" type="tracking">
+</body>
+</html>
